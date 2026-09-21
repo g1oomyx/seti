@@ -1,27 +1,63 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <thread>
-#include <chrono>
-using namespace std;
-int main() {
+#include <iostream>     // Подключаем библиотеку для ввода и вывода
+#include <fstream>      // Подключаем библиотеку для работы с файлами
+#include <string>       // Подключаем библиотеку для работы со строками
+#include <thread>       // Подключаем библиотеку для работы с потоками
+#include <chrono>       // Подключаем библиотеку для работы со временем
 
+using namespace std;    // Позволяет не писать std:: перед стандартными типами и функциями
+
+int main() {            // Главная функция программы
+
+    // Путь к файлу, в котором клиент хранит вес и рост
     string filename1 = "..\\..\\klient.txt";
+
+    // Путь к файлу, в который сервер записывает результат
     string filename2 = "..\\..\\server.txt";
+
+    // Бесконечный цикл: сервер постоянно проверяет файл клиента
     while (true) {
-        ifstream in(filename1, ios::app);
+
+        // Открываем klient.txt для чтения
+        ifstream in(filename1);
+
+        // Проверяем, удалось ли открыть файл
         if (!in.is_open()) {
+
+            // Если файл открыть не удалось, выводим сообщение об ошибке
             cerr << "Wrong\n";
+
+            // Завершаем программу с кодом ошибки 1
             return 1;
         }
+
+        // Объявляем переменные для веса и роста
         double ves, rost;
+
+        // Считываем из файла вес и рост
+        // Например: 74.6 1.82
         in >> ves >> rost;
+
+        // Закрываем файл klient.txt
         in.close();
+
+        // Объявляем переменную для индекса массы тела
         double imt;
-        imt = ves / (rost*rost);
+
+        // Рассчитываем ИМТ по формуле:
+        // вес / (рост * рост)
+        imt = ves / (rost * rost);
+
+        // Открываем файл server.txt для записи результата
         ofstream out(filename2);
-        out << imt <<"\n";
+
+        // Записываем рассчитанный ИМТ в файл
+        out << imt << "\n";
+
+        // Закрываем файл server.txt
         out.close();
+
+        // Приостанавливаем работу сервера на 1 секунду
+        // После этого цикл while начинается заново
         this_thread::sleep_for(chrono::seconds(1));
     }
 }
