@@ -1,0 +1,268 @@
+i = 0
+while i < 5
+    i = i + 1
+end
+
+julia> 3 < 5
+false
+julia> 8 > 3
+true
+julia> 8 == 5 + 3
+true
+julia> 3 == 5
+false
+julia> 3 <= 3
+true
+
+julia> 3 > 5
+false
+julia> 8 > 3
+true
+julia> 8 == 5 + 3
+true
+julia> 3 == 5
+false
+julia> 3 <= 3
+true
+
+julia> typeof(7 > 3)
+Bool
+julia> typeof(false)
+Bool
+julia> reinterpret(UInt8, false)
+0x00
+julia> reinterpret(UInt8, true)
+0x01
+
+julia> true + true
+2
+julia> 3true + true
+4
+julia> true + false + true
+2
+julia> false + false
+0
+
+julia> x = 3
+3
+julia> x < 4 || x > 10
+true
+julia> x = 5
+5
+julia> x < 4 || x > 10
+false
+
+julia> x > 4 && x < 10
+true
+julia> x = 12
+12
+julia> x > 4 && x < 10
+false
+
+julia> z = 3 + 2
+5
+
+julia> i = 0
+0
+julia> while i < 5
+    i = i + 1
+    print(i)
+end
+12345
+
+julia> i = 0
+0
+julia> while i < 5
+    i = i + 1
+    println(i)
+end
+1
+2
+3
+4
+5
+
+julia> print(3 + 4)
+7
+
+julia> print(i)
+5
+
+angle = 0
+while angle <= 90
+    println(angle)
+    angle = angle + 15
+end
+
+deg2rad(θ) = (θ / 360)*2π
+
+angle = 0
+while angle <= 90
+    rad = deg2rad(angle)
+    x = sin(rad)
+    println(x)
+    angle = angle + 15
+end
+
+julia> r = 2:4
+2:4
+julia> first(r)
+2
+julia> last(r)
+4
+julia> in(1, r)
+false
+julia> in(3, r)
+true
+julia> 3 in r
+true
+
+i = 0
+while i in 0:4
+    printin(i)
+    i = i + 1
+end
+
+for i in 0:4
+    printin(i)
+end
+
+for angle in 0:15:90
+    printin(angle)
+end
+
+function print_sin_table(increment, max_angle)
+    angle = 0
+    while angle <= max_angle
+        rad = deg2rad(angle)
+        x = sin(rad)
+        println(x)
+        angle = angle + increment
+    end
+end
+
+function f(n)
+    total = 0
+    for x in 1:n
+        total += 2x + 1
+    end
+    total
+end
+
+function sine(x)
+    n = 5
+    total = 0
+    for i in 0:n
+        total += (-1)^i*x^(2i+1)/factorial(2i + 1)
+    end
+    total
+end
+
+julia> fac(n) = prod(1:n)
+julia> fac(5)
+120
+julia> factorial(5)
+120
+
+function fac(n)
+    prod = 1
+    while n >= 1
+        prod *= n
+        n -= 1
+    end
+    prod
+end
+
+fac(n) = n*fac(n-1)
+
+function fac(n)
+    if n <= 2
+        return n
+    end
+    n*fac(n-1)
+end
+
+function fac(n)
+    if n <= 2
+        n
+    else
+        n*fac(n-1)
+    end
+end
+
+julia> x = 4
+4
+julia> y = if x > 3
+    6
+else
+    4
+end
+julia> y
+
+function fac(n)
+    if n > 2
+        n*fac(n-1)
+    elseif n > 0
+        n
+    elseif n == 0
+        1
+    else
+        err = DomainError(n, "n must not be negative.")
+        throw(err)
+    end
+end
+
+function alpha()
+    try
+        beta()
+    catch e
+    end
+end
+
+julia> y = try fac(3) catch e 42 end
+6
+julia> y = try fac(-3) catch e 42 end
+42
+julia> fac(-3)
+
+alice = encrypt(bob)
+
+y = gamma(beta(alpha(x)))
+
+function fib(n)
+    if n == 0
+        0
+    elseif n == 1
+        1
+    else
+        fib(n-1) + fib(n-2)
+    end
+end
+
+julia> fib(3) == fib(2) + fib(1)
+julia> fib(4) == fib(3) + fib(2)
+julia> n = 5
+
+function fib(n)
+    if 0 <= n <= 1
+        n
+    else
+        fib(n-1) + fib(n-2)
+    end
+end
+
+function fibi(n)
+    if 0 <= n <= 1
+        return n
+    end
+    for i in 2:n
+        tmp = x
+        x += prev
+        prev = tmp
+    end
+    x
+end
+
+for i in 0:4
+    println(i)
+end
